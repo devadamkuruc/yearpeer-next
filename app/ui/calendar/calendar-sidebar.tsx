@@ -1,12 +1,14 @@
-import { SidebarContent } from "@/components/ui/sidebar";
+import { Sidebar, SidebarContent, SidebarHeader } from "@/components/ui/sidebar";
 
-export default function Sidebar() {
+export default function CalendarSidebar() {
     return (
-        <Sidebar>
+        <Sidebar side="right">
+            <SidebarHeader>
+                Header
+            </SidebarHeader>
             <SidebarContent>
-
+                Content
             </SidebarContent>
-
         </Sidebar>
     );
 };

@@ -10,13 +10,11 @@ export default async function Layout({children, params}: {
 }) {
     const {year} = await params;
 
-    console.log(year);
-
     return (
         <SidebarProvider>
-            <div className="flex h-screen bg-[#E5E5E5]">
-                <div className="flex flex-1 flex-col">
-                    <div className="flex">
+            <div className="flex h-screen w-screen bg-[#E5E5E5]">
+                <div className="flex flex-1 flex-col gap-4 p-4">
+                    <div className="flex justify-between">
                         <Link href={`/calendar/${year}`}>
                             <Image src="/yearpeer-logo.svg" alt="YearPeer Logo" width={120} height={27}/>
                         </Link>
