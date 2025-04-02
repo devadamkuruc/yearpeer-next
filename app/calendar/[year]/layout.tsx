@@ -24,7 +24,7 @@ export default async function Layout({children, params}: {
 
                     {children}
                 </div>
-                <CalendarSidebar/>
+                <CalendarSidebar year={year} />
             </div>
         </SidebarProvider>
     );
