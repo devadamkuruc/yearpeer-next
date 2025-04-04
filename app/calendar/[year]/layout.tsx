@@ -12,7 +12,7 @@ export default async function Layout({children, params}: {
 
     return (
         <SidebarProvider>
-            <div className="flex h-screen w-screen bg-[#E5E5E5]">
+            <div className="flex min-h-screen min-w-screen bg-[#E5E5E5]">
                 <div className="flex flex-1 flex-col gap-4 p-4">
                     <div className="flex justify-between">
                         <Link href={`/calendar/${year}`}>

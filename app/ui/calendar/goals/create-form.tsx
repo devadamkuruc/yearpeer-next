@@ -18,6 +18,8 @@ import {
 } from "@/components/ui/select";
 import {GOAL_COLORS} from "@/constants";
 import {ImpactLevel} from "@prisma/client";
+import {DateRange} from "react-day-picker";
+import {formatDateForInput} from "@/lib/date-utils";
 
 // Define a mapping for display purposes
 const IMPACT_DISPLAY = {
@@ -28,7 +30,11 @@ const IMPACT_DISPLAY = {
     [ImpactLevel.CRITICAL]: "Critical"
 };
 
-export default function CreateGoalForm() {
+interface CreateGoalFormProps {
+    dateRange?: DateRange;
+}
+
+export default function CreateGoalForm({ dateRange }: CreateGoalFormProps) {
     const initialState: GoalState = {message: null, errors: {}};
     const [state, formAction] = useActionState(createGoal, initialState);
 
@@ -84,6 +90,7 @@ export default function CreateGoalForm() {
                             id="startDate"
                             name="startDate"
                             type="date"
+                            defaultValue={dateRange?.from ? formatDateForInput(dateRange.from) : ''}
                             aria-describedby="startDate-error"
                         />
                         <div id="startDate-error" aria-live="polite" aria-atomic="true">
@@ -103,6 +110,7 @@ export default function CreateGoalForm() {
                             id="endDate"
                             name="endDate"
                             type="date"
+                            defaultValue={dateRange?.to ? formatDateForInput(dateRange.to) : ''}
                             aria-describedby="endDate-error"
                         />
                         <div id="endDate-error" aria-live="polite" aria-atomic="true">

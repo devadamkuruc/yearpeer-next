@@ -19,6 +19,7 @@ import {
 import {GOAL_COLORS} from "@/constants";
 import {ImpactLevel} from "@prisma/client";
 import {Goal} from "@/lib/definitions";
+import {formatDateForInput} from "@/lib/date-utils";
 
 // Define a mapping for display purposes
 const IMPACT_DISPLAY = {
@@ -37,8 +38,6 @@ export default function EditGoalForm({ goal }: EditGoalFormProps) {
     const initialState: GoalState = {message: null, errors: {}};
     const updateGoalWithId = editGoal.bind(null, goal.id);
     const [state, formAction] = useActionState(updateGoalWithId, initialState);
-
-    console.log(goal);
 
     return (
         <form action={formAction}>
@@ -94,7 +93,7 @@ export default function EditGoalForm({ goal }: EditGoalFormProps) {
                             id="startDate"
                             name="startDate"
                             type="date"
-                            defaultValue={goal.startDate.toString()}
+                            defaultValue={formatDateForInput(goal.startDate)}
                             aria-describedby="startDate-error"
                         />
                         <div id="startDate-error" aria-live="polite" aria-atomic="true">
@@ -114,7 +113,7 @@ export default function EditGoalForm({ goal }: EditGoalFormProps) {
                             id="endDate"
                             name="endDate"
                             type="date"
-                            defaultValue={goal.endDate.toString()}
+                            defaultValue={formatDateForInput(goal.endDate)}
                             aria-describedby="endDate-error"
                         />
                         <div id="endDate-error" aria-live="polite" aria-atomic="true">
@@ -133,7 +132,7 @@ export default function EditGoalForm({ goal }: EditGoalFormProps) {
                         <Label htmlFor="color" className="text-right">
                             Color
                         </Label>
-                        <Select name="color">
+                        <Select name="color" defaultValue={goal.color}>
                             <SelectTrigger className="w-full" id="color">
                                 <SelectValue placeholder="Select a color"/>
                             </SelectTrigger>
@@ -168,7 +167,7 @@ export default function EditGoalForm({ goal }: EditGoalFormProps) {
                         <Label htmlFor="impact" className="text-right">
                             Impact
                         </Label>
-                        <Select name="impact">
+                        <Select name="impact" defaultValue={goal.impact}>
                             <SelectTrigger className="w-full" id="impact">
                                 <SelectValue placeholder="Select impact level"/>
                             </SelectTrigger>
@@ -195,15 +194,15 @@ export default function EditGoalForm({ goal }: EditGoalFormProps) {
                 </div>
 
                 {/* General form error message */}
-                {state.message && state.message !== "Goal created successfully" && (
+                {state.message && state.message !== "Goal updated successfully" && (
                     <p className="text-sm text-red-500">{state.message}</p>
                 )}
-                {state.message === "Goal created successfully" && (
+                {state.message === "Goal updated successfully" && (
                     <p className="text-sm text-green-500">{state.message}</p>
                 )}
             </div>
             <DialogFooter>
-                <Button type="submit">Create goal</Button>
+                <Button type="submit">Edit goal</Button>
             </DialogFooter>
 
         </form>
