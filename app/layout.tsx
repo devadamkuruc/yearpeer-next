@@ -8,7 +8,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-        <body className={`${yearpeerFont.className} antialiased`}>{children}</body>
+        <body className={`${yearpeerFont.className} antialiased bg-[#E5E5E5]`}>{children}</body>
         </html>
     );
 }
